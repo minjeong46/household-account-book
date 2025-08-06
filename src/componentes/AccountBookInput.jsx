@@ -1,35 +1,37 @@
 import React, { useState } from "react";
 
-const AccountBookInput = ({bookList, setBookList}) => {
+const AccountBookInput = ({ bookList, setBookList }) => {
     const initialInput = {
-    name: "",
-    price: 0,
-    list: "",
-    date: "",
-    memoCheck: false,
-    memo: "",
-    reSel: false,
-};
+        name: "",
+        price: 0,
+        list: "",
+        date: "",
+        memoCheck: false,
+        memo: "",
+        reSel: false,
+    };
     const [input, setInput] = useState(initialInput);
 
-
     const onChange = (e) => {
-        const {name, value, type, checked} = e.target;
+        const { name, value, type, checked } = e.target;
         setInput({
             ...input,
-            [name]: type === "checked" ? checked : value
+            [name]:
+                type === "checkbox"
+                    ? checked
+                    : name === "reSel"
+                    ? value === "true"
+                    : value,
         });
+        console.log(input.memoCheck);
     };
 
     const onClickHandler = (e) => {
         e.preventDefault();
-        setBookList([
-            ...bookList,
-            input
-        ])
+        setBookList([...bookList, input]);
 
-        setInput(initialInput)
-    }
+        setInput(initialInput);
+    };
 
     return (
         <form>
@@ -67,7 +69,13 @@ const AccountBookInput = ({bookList, setBookList}) => {
                 <label htmlFor="" className="pr-2">
                     유형
                 </label>
-                <select name="list" id="list" onChange={onChange} value={input.list} required>
+                <select
+                    name="list"
+                    id="list"
+                    onChange={onChange}
+                    value={input.list}
+                    required
+                >
                     <option value="food">식비</option>
                     <option value="fixed">고정비</option>
                     <option value="car">차랑유지비</option>
@@ -81,7 +89,13 @@ const AccountBookInput = ({bookList, setBookList}) => {
                 <label htmlFor="" className="pr-2">
                     구입 날짜
                 </label>
-                <input type="date" name="date" onChange={onChange} value={input.date} required />
+                <input
+                    type="date"
+                    name="date"
+                    onChange={onChange}
+                    value={input.date}
+                    required
+                />
             </div>
             <div className="mb-2">
                 <label className="pr-2">메모</label>
@@ -93,27 +107,45 @@ const AccountBookInput = ({bookList, setBookList}) => {
                         onChange={onChange}
                         checked={input.memoCheck}
                     />
-                    <label htmlFor="memoTrue" >메모 작성</label>
+                    <label htmlFor="memoTrue">메모 작성</label>
                 </div>
-                <input
-                    type="text"
-                    id="memo"
-                    name="memo"
-                    placeholder="메모를 입력하세요"
-                    className="w-52"
-                    onChange={onChange}
-                    value={input.memo}
-                    required
-                />
+                {input.memoCheck && (
+                    <input
+                        type="text"
+                        id="memo"
+                        name="memo"
+                        placeholder="메모를 입력하세요"
+                        className="w-52"
+                        onChange={onChange}
+                        value={input.memo}
+                        required
+                    />
+                )}
             </div>
             <div className="mb-2">
                 <label className="pr-2">재구매 의사</label>
-                <input type="radio" id="reSelTrue" name="reSel" className="" onChange={onChange} checked={input.reSel === true} />
+                <input
+                    type="radio"
+                    id="reSelTrue"
+                    name="reSel"
+                    value="true"
+                    onChange={onChange}
+                    checked={input.reSel === true}
+                />
                 <label htmlFor="reSelTrue">한다</label>
-                <input type="radio" id="reSelFalse" name="reSel" className="" onChange={onChange} checked={input.reSel === false}  />
+                <input
+                    type="radio"
+                    id="reSelFalse"
+                    name="reSel"
+                    value="false"
+                    onChange={onChange}
+                    checked={input.reSel === false}
+                />
                 <label htmlFor="reSelFalse">안한다</label>
             </div>
-            <button type="submit" onClick={(e) => onClickHandler(e)}>저장</button>
+            <button type="submit" onClick={(e) => onClickHandler(e)}>
+                저장
+            </button>
         </form>
     );
 };
