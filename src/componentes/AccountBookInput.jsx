@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
-const AccountBookInput = ({ bookList, setBookList }) => {
+const AccountBookInput = ({ bookList, setBookList, categoryList }) => {
     const initialInput = {
         name: "",
         price: 0,
-        list: "",
+        category: "",
         date: "",
         memoCheck: false,
         memo: "",
@@ -23,7 +23,6 @@ const AccountBookInput = ({ bookList, setBookList }) => {
                     ? value === "true"
                     : value,
         });
-        console.log(input.memoCheck);
     };
 
     const onClickHandler = (e) => {
@@ -70,19 +69,19 @@ const AccountBookInput = ({ bookList, setBookList }) => {
                     유형
                 </label>
                 <select
-                    name="list"
-                    id="list"
+                    name="category"
+                    id="category"
                     onChange={onChange}
-                    value={input.list}
+                    value={input.category}
                     required
                 >
-                    <option value="food">식비</option>
-                    <option value="fixed">고정비</option>
-                    <option value="car">차랑유지비</option>
-                    <option value="life">생활/쇼핑비</option>
-                    <option value="culture">문화비</option>
-                    <option value="medical">의료비</option>
-                    <option value="etc">기타</option>
+                    {categoryList.map((category) => {
+                        return (
+                            <option key={category.value} value={category.value}>
+                                {category.label}
+                            </option>
+                        );
+                    })}
                 </select>
             </div>
             <div className="mb-2">
