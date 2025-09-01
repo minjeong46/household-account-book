@@ -1,13 +1,17 @@
 import React from "react";
 
-const AccountBookList = ({ bookList, categoryFilter, sortFilter }) => {
+const AccountBookList = ({
+    bookList,
+    categoryFilter,
+    sortFilter,
+    startDateSort,
+    endDateSort,
+}) => {
+    let sortFilterBookList = bookList;
+
     const categoryFilterBookList = bookList.filter(
         (item) => item.category === categoryFilter
     );
-
-    let sortFilterBookList = bookList;
-
-    console.log(sortFilter);
 
     if (sortFilter === "priceHigh") {
         sortFilterBookList = [...bookList].sort((a, b) => b.price - a.price);
@@ -20,6 +24,12 @@ const AccountBookList = ({ bookList, categoryFilter, sortFilter }) => {
     } else if (sortFilter === "earliest") {
         sortFilterBookList = [...bookList].sort(
             (a, b) => new Date(a.date) - new Date(b.date)
+        );
+    }
+
+    if (startDateSort && endDateSort) {
+        sortFilterBookList = bookList.filter(
+            (item) => item.date >= startDateSort && item.date <= endDateSort
         );
     }
 
@@ -38,9 +48,9 @@ const AccountBookList = ({ bookList, categoryFilter, sortFilter }) => {
                       );
                   })
                 : sortFilterBookList &&
-                  sortFilterBookList.map((item) => {
+                  sortFilterBookList.map((item, index) => {
                       return (
-                          <div>
+                          <div key={index + `${new Date(item.date)}`}>
                               {item.name}
                               {item.category}
                               {item.price}

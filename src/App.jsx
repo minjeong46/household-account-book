@@ -24,6 +24,24 @@ function App() {
             memo: "",
             reSel: true,
         },
+        {
+            name: "주유",
+            price: 20000,
+            category: "car",
+            date: "2025-09-12",
+            memoCheck: false,
+            memo: "",
+            reSel: true,
+        },
+        {
+            name: "다이소 펜슬",
+            price: 3000,
+            category: "life",
+            date: "2025-09-01",
+            memoCheck: true,
+            memo: "삼색볼펜",
+            reSel: true,
+        },
     ]);
     const categoryList = [
         { label: "식비", value: "food" },
@@ -37,6 +55,8 @@ function App() {
 
     const [categoryFilter, setCategoryFilter] = useState("");
     const [sortFilter, setSortFilter] = useState("");
+    const [startDateSort, setStartDateSort] = useState("");
+    const [endDateSort, setEndDateSort] = useState("");
 
     const getSelectedCategoryFilter = (category) => {
         setCategoryFilter(category);
@@ -44,6 +64,12 @@ function App() {
 
     const getSelectedSortFilter = (sort) => {
         setSortFilter(sort);
+    };
+    const getStartDateSort = (date) => {
+        setStartDateSort(date);
+    };
+    const getEndDateSort = (date) => {
+        setEndDateSort(date);
     };
 
     return (
@@ -58,11 +84,15 @@ function App() {
                     categoryList={categoryList}
                     getSelectedCategoryFilter={getSelectedCategoryFilter}
                     getSelectedSortFilter={getSelectedSortFilter}
+                    getStartDateSort={getStartDateSort}
+                    getEndDateSort={getEndDateSort}
                 />
                 <AccountBookList
                     bookList={bookList}
                     categoryFilter={categoryFilter}
                     sortFilter={sortFilter}
+                    startDateSort={startDateSort}
+                    endDateSort={endDateSort}
                 />
             </div>
         </main>

@@ -4,6 +4,8 @@ const AccountBookSort = ({
     categoryList,
     getSelectedCategoryFilter,
     getSelectedSortFilter,
+    getStartDateSort,
+    getEndDateSort,
 }) => {
     const sortFilter = [
         { label: "가격 높은 순", value: "priceHigh" },
@@ -18,6 +20,13 @@ const AccountBookSort = ({
 
     const onChangeSortFilter = (e) => {
         getSelectedSortFilter(e.target.value);
+    };
+
+    const onChangeStartDate = (e) => {
+        getStartDateSort(e.target.value);
+    };
+    const onChangeEndDate = (e) => {
+        getEndDateSort(e.target.value);
     };
 
     return (
@@ -43,8 +52,16 @@ const AccountBookSort = ({
                 })}
             </select>
             <div>
-                <input type="date" placeholder="시작"></input>
-                <input type="date" placeholder="종료"></input>
+                <input
+                    type="date"
+                    placeholder="시작"
+                    onChange={onChangeStartDate}
+                ></input>
+                <input
+                    type="date"
+                    placeholder="종료"
+                    onChange={onChangeEndDate}
+                ></input>
             </div>
         </div>
     );
