@@ -75,6 +75,7 @@ const AccountBookInput = ({ bookList, setBookList, categoryList }) => {
                     value={input.category}
                     required
                 >
+                    <option value={""}>선택</option>
                     {categoryList.map((category) => {
                         return (
                             <option key={category.value} value={category.value}>
