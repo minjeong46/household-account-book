@@ -1,12 +1,29 @@
-# React + Vite
+# 요구사항
+1. 다음과 같은 항목들을 form input을 통해 입력을 받습니다.
+   ```
+    - 이름 : string
+    - 가격 : number
+    - 유형 : string
+    - 구입 날짜 : date
+    - 메모 : string
+   ```
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+2. 체크박스로 체크가 된 경우만 메모 input을 보여주고 값을 받습니다.
+    ```
+    - 재구매 의사 : boolean
+    - 라디오 버튼을 통해 구현
+    ```
 
-Currently, two official plugins are available:
+3. 입력받은 소비 항목들은 최신 순서대로 리스트로 보여집니다.
+   - 유형별 필터를 통해 유형에 맞춰 필터링된 리스트를 볼 수 있습니다.
+   - 정렬 기준을 다음과 같이 가지고 정렬해 줄 수 있습니다.
+     
+          - 가격 높은 순
+          - 가격 낮은 순
+          - 최신 순
+          - 오래된 순
+     
+   - 기간을 정해서 해당 기간에 소비한 내역만 볼 수 있습니다.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
++) 디자인 작업은 진행하지 않고 기능 구현을 우선으로 구현하였다. 
